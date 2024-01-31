@@ -6,20 +6,20 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Wiki-Template',
-  tagline: 'Docusaurus 插件文档模板',
+  title: '诗意维基',
+  tagline: '学习笔记，文档翻译',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://neige7.github.io',
+  url: 'https://nerorrlex911.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/Wiki-Template/',
+  baseUrl: '/Poem-Wiki/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'neige7', // Usually your GitHub org/user name.
-  projectName: 'Wiki-Template', // Usually your repo name.
+  organizationName: 'Nerorrlex911', // Usually your GitHub org/user name.
+  projectName: 'Poem-Wiki', // Usually your repo name.
   deploymentBranch: 'gh-pages',
   trailingSlash: false,
 
@@ -43,7 +43,7 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           routeBasePath: '/',
           editUrl:
-            'https://github.com/Neige7/Wiki-Template/blob/main'
+            'https://github.com/Nerorrlex911/Poem-Wiki/blob/main'
         },
         blog: false,
         theme: {
@@ -59,7 +59,7 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'Wiki-Template',
+        title: 'Poem-Wiki',
         logo: {
           alt: 'Logo',
           src: 'img/logo.svg',
@@ -68,9 +68,9 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'intro',
+            docId: 'Minestom/intro',
             position: 'left',
-            label: '开始',
+            label: 'Minestom-translation',
           },
           // 搜索框
           {
@@ -78,7 +78,7 @@ const config = {
             position: 'right',
           },
           {
-            href: 'https://github.com/Neige7/Wiki-Template',
+            href: 'https://github.com/Nerorrlex911/Poem-Wiki',
             label: 'GitHub',
             position: 'right',
           },
@@ -106,16 +106,16 @@ const config = {
             items: [
               {
                 label: 'QQ群',
-                href: 'https://jq.qq.com/?_wv=1027&k=QKurhX6E',
+                href: 'http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=21iwTUVq9CNq09P_qskFUbm19753rFjZ&authKey=qsBXx4lP6Hl7m9w5r9beGa1HRpaBiCusF88%2FlT1zBUsrl7NeJiGJfd4AXQPjzfO6&noverify=0&group_code=732572379',
               },
             ],
           },
           {
-            title: '插件发布',
+            title: '个人主页',
             items: [
               {
                 label: 'GitHub',
-                href: 'https://github.com/Neige7/Wiki-Template',
+                href: 'https://github.com/Nerorrlex911',
               },
             ],
           },
