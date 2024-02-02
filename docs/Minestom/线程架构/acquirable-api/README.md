@@ -1,18 +1,22 @@
+---
+description: 介绍如何安全地获取对象
+sidebar_position: 1
+---
 # Acquirable API
 
 ### Presentation
 
-`Acquirable<T>` represents an object of type `T` that you can retrieve but where its thread-safe access is not certain.
+`Acquirable<T>`代表一个可获取但线程安全的获取方式不确定的`T`类型对象。
 
-To give an example, imagine two entities very far from each other and therefore ticked in different threads. Let's imagine that entity A wants to trade items with entity B, it is something that would require synchronization to ensure that the trade happens successfully. From entity A's thread, you can retrieve a `Acquirable<Entity>` containing entity B, and from there acquire it to have safe access to the entity in a different thread.
+举个例子，想象一下有两个实体，它们之间的距离很远，因此在不同的线程中进行调度。假设实体A想要与实体B交易物品，这是需要同步操作以确保交易成功。从实体A的线程中，您可以检索包含实体B的`Acquirable<Entity>`，然后从那里获取它，以便在不同的线程中安全地访问实体。
 
-The API provides multiple benefits:
+这样的API有许多优点:
 
-* Thread-safety with synchronous code
-* Same code whether you use one thread per chunk or a single for the whole server
-* Better control over your data to identify bottlenecks
+* 同步且线程安全的代码
+* 无论你是每个区块一个线程还是整个服务器一个线程，代码是一样的
+* 更好地管理你的数据以找到性能瓶颈
 
-Here how the acquirable API looks in practice:
+acquirable API的具体代码是这样的:
 
 ```java
 Acquirable<Entity> acquirableEntity = ...;
@@ -23,11 +27,12 @@ acquirableEntity.sync(entity -> {
 System.out.println("Acquisition happened successfully");
 ```
 
-`Acquirable#acquire` will block the current thread until `acquirableEntity` becomes accessible, and execute the consumer **in the same thread** once it is the case.
 
-It is important to understand that the consumer is called in the same thread, it is the whole magic of the Acquirable API, your code stays the exact same.
+`Acquirable#acquire`会在`acquirableEntity`可获取之前阻塞当前线程，获取后在**同一线程**中执行回调。
 
-The entity object from the consumer should however **only** be used inside of the consumer. Meaning that if you need to save the entity somewhere for further processing, you shall use the acquirable object instead of the acquired one.
+理解**回调在同一线程中执行**这件事很重要，这是Acquirable API的奥妙所在，你的代码不需要做任何改动以适应多线程。
+
+然而回调中的实体对象**只能**在回调中使用。这意味着如果你需要在回调之外保存实体对象以便后续处理，你应该使用acquirable对象而不是获取的实体对象。
 
 ```java
     private Acquirable<Entity> myEntity; // <- GOOD
@@ -36,12 +41,12 @@ The entity object from the consumer should however **only** be used inside of th
     public void randomMethod(Acquirable<Entity> acquirableEntity) {
         this.myEntity = acquirableEntity;
         acquirableEntity.sync(entity -> {
-            // "myEntity = entity" is not safe, always cache the acquirable object
+            // "myEntity = entity" 不安全, 永远缓存Acquirable而不是获取的对象
         });
     }
 ```
 
-Now, if you do not need the acquisition to happen synchronously you have the choice to create the request and handle it later on (at the end of the tick), for this you simply need to "schedule" the acquisition.
+现在，如果你不需要同步获取，你可以选择创建请求并稍后处理它（在tick结束时），为此你只需要“调度(schedule)”你的获取操作。
 
 ```java
 Acquirable<Entity> acquirableEntity = getAcquiredElement();
@@ -52,7 +57,7 @@ acquirableEntity.async(entity -> {
 System.out.println("Hey I scheduled the acquisition");
 ```
 
-Will print you:
+将会输出:
 
 ```
 Hey I am starting the acquisition
@@ -60,20 +65,20 @@ Hey I scheduled the acquisition
 Hallo
 ```
 
-And a few other options:
+还有一些可用选项:
 
 ```java
 Acquirable<Player> acquirable = getAcquirable();
 
-// #local() allows you to retrieve the element only if present
-// in the current thread
+// #local() 只在对象存在的情况下获取他
+// 当前线程
 Optional<Player> local = acquirable.local();
 local.ifPresent(player -> {
     // Run code...
 });
 
-// #lock() allows you to manually control when to unlock the acquisition
-// if you cannot use #sync()
+// #lock() 给获取操作上锁，并在之后由你决定何时解锁
+// 如果你用不了 #sync()
 Acquired<Player> acquiredPlayer = acquirable.lock();
 Player player = acquiredPlayer.get();
 // Run code...
@@ -82,11 +87,11 @@ acquiredPlayer.unlock();
 
 ### Acquirable Collections
 
-Let's say you have a `AcquirableCollection<Player>` and you want to access **safely** all of the players it contains. You have multiple solutions, each having pros & cons.
+那么假如你有一个`AcquirableCollection<Player>`，你想要**安全地**访问它包含的所有玩家。你有多种各有优劣的解决方案。
 
 #### Naive loop
 
-The one that you probably have in mind is:
+你最开始想到的也许是:
 
 ```java
 // NAIVE ACQUIRABLE LOOP
@@ -98,11 +103,11 @@ for(Acquirable<Player> acquirablePlayer : acquirablePlayers){
 }
 ```
 
-It does work, but not efficient at all since you have to acquire each element one by one.
+这的确可以工作，但是效率很低，因为你需要一个一个地获取每个元素。
 
 #### AcquirableCollection#forEachSync
 
-It is the most efficient way to loop through a collection, the callback is executed for each individual element and stops only once all elements have been acquired.
+这是遍历集合最有效的方法，回调会为每个元素执行一次，当且仅当所有元素都被获取后才会停止。
 
 ```java
 AcquirableCollection<Player> acquirablePlayers = getOnlinePlayers();
@@ -114,38 +119,40 @@ acquirablePlayers.acquireAsync(player -> {
 });
 ```
 
-It is the most used one, simply because it doesn't create as much overhead as the previous ones. The element in the consumer is released directly without having to wait for the others.
+这是应用最广泛的一种，因为它不会像前面的那些方法那样创建太多的开销。回调中的元素会直接释放，而不必等待其他元素。
 
-### Access the acquirable object without acquiring it
+### 在不使用acquire的情况下直接获取对象本身
 
-I can understand that having callbacks everywhere even if you know what you are doing is not ideal. You also have the choice to directly unwrap the acquirable object to retrieve the value inside.
+即使你知道你在做什么，到处叠回调也是糟糕的。你也可以直接解开acquirable对象来获取里面的值。
 
 ```java
 Acquirable<Entity> acquirableEntity = ...;
 Entity entity = acquirableEntity.unwrap();
 ```
 
-A similar method exists for collections.
+集合也有类似的方法:
 
 ```java
 AcquirableCollection<Player> acquirablePlayers = getOnlinePlayers();
 Stream<Player> players = acquirablePlayers.unwrap();
 ```
 
-{% hint style="warning" %}
-Those are not safe operations, be sure to read the [Thread safety](../thread-safety.md) page to understand the implications.
-{% endhint %}
+:::caution
 
-I would personally recommend commenting everywhere you use those unsafe methods to indicate why this operation does not compromise the application's safety. If you cannot find any reason, you likely shouldn't.
+这些不是线程安全的操作，确保你阅读了[线程安全](../线程安全.md)页面以理解其中的含义。
 
-### Access all the entities in the current thread
+:::
+
+推荐在使用这些不安全方法的地方添加注释，以说明为什么这个操作不会危及应用的安全性。如果你找不到任何理由，你可能不应该这样做。
+
+### 获取当前线程所有实体
 
 ```java
 Stream<Entity> entities = Acquirable.currentEntities();
 ```
 
-### What type to request and return in methods
+### 方法参数类型和返回类型的选择
 
-You have obviously the right to do what you prefer. But as a general rule, you should return `Acquirable<T>` objects and request for `T`.
+显然你有权利按你喜欢的来。但是作为一般规则，你应该返回`Acquirable<T>`对象并请求`T`。
 
-The reason behind this choice is that you are sure (unless unsafe methods are used) that you will have safe access to the given parameter, but that you do not know what the user will want to do with it once you return.
+这种规则背后的原因是，你可以确定（除非使用不安全的方法）你将安全地访问给定的参数，但是你不知道用户在你返回后会想要做什么。
