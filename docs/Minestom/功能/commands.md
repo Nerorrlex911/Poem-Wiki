@@ -76,7 +76,7 @@ public class TestCommand extends Command {
 
 ## Argument callback
 
-Let's say you have the command "/set \<number>" and the player types "/set text", you would probably like to warn the player that the argument requires a number and not text. This is where argument callbacks come in!
+Let's say you have the command "/set <number>" and the player types "/set text", you would probably like to warn the player that the argument requires a number and not text. This is where argument callbacks come in!
 
 When the command parser detects a wrongly typed argument, it will first check if the given argument has an error callback to execute, if not, the default executor is used.
 
