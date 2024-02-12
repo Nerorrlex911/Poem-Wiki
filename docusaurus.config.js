@@ -68,9 +68,9 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'Minestom/intro',
+            docId: 'Pouvoir/intro',
             position: 'left',
-            label: 'Minestom-translation',
+            label: 'Pouvoir',
           },
           // 搜索框
           {

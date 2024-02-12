@@ -2,6 +2,12 @@
 sidebar_position: 1
 ---
 
-# Docusaurus 插件文档模板
+# ZimaBlue's wiki
 
-跟着模板走, 文档不用愁
+目前维护中:
+
+诗意系列插件:
+1. PoemSuits
+
+Skillw系列插件:
+1. Pouvoir
