@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwiki_template=self.webpackChunkwiki_template||[]).push([[7589],{5906:e=>{e.exports=JSON.parse('{"title":"PoemSuits","slug":"/category/poemsuits","permalink":"/Poem-Wiki/category/poemsuits","navigation":{"next":{"title":"\u524d\u8a00","permalink":"/Poem-Wiki/PoemSuits/intro"}}}')}}]);

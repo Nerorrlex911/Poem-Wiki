@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkwiki_template=self.webpackChunkwiki_template||[]).push([[836],{4655:i=>{i.exports=JSON.parse('{"title":"Pouvoir","slug":"/category/pouvoir","permalink":"/Poem-Wiki/category/pouvoir","navigation":{"previous":{"title":"ZimaBlue\'s wiki","permalink":"/Poem-Wiki/intro"},"next":{"title":"Skillw-Pouvoir","permalink":"/Poem-Wiki/Pouvoir/intro"}}}')}}]);
