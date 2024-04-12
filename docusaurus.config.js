@@ -67,10 +67,22 @@ const config = {
         hideOnScroll: false,
         items: [
           {
+          type: 'doc',
+          docId: 'PoemSuits/intro',
+          position: 'left',
+          label: 'PoemSuits',
+          },
+          {
             type: 'doc',
             docId: 'Pouvoir/intro',
             position: 'left',
             label: 'Pouvoir',
+          },
+          {
+            type: 'doc',
+            docId: 'NeigeItems/intro',
+            position: 'left',
+            label: 'NeigeItems',
           },
           // 搜索框
           {
@@ -121,7 +133,7 @@ const config = {
           },
         ],
         // 底部版权信息
-        copyright: `Copyright © ${new Date().getFullYear()} Neige, All Rights Reserved.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Nerorrlex911, All Rights Reserved.`,
       },
       // 深浅主题
       prism: {

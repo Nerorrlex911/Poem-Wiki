@@ -4,20 +4,20 @@ import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: '简单易用',
+    title: '高度客制化',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        就这点配置有啥难的.
+        自由地创造你想要的内容
       </>
     ),
   },
   {
-    title: '文档详细',
+    title: '上手困难',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        看完文档学不会怎么用说明你是个傻逼.
+        做好心理准备, 你会遇到很多麻烦，即使有社区会提供帮助。
       </>
     ),
   },
