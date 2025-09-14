@@ -7,7 +7,7 @@ sidebar_position: 1
 目前维护中:
 
 诗意系列插件:
-1. PoemSuits
+1. ~~PoemSuits~~
 
 Skillw系列插件:
-1. Pouvoir
+1. ~~Pouvoir~~

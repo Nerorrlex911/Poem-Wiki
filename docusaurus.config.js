@@ -6,8 +6,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: '诗意维基',
-  tagline: '学习笔记，文档翻译',
+  title: 'PoemSuits-wiki',
+  tagline: 'PoemSuits-wiki',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -18,7 +18,7 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'Nerorrlex911', // Usually your GitHub org/user name.
+  organizationName: 'nerorrlex911', // Usually your GitHub org/user name.
   projectName: 'Poem-Wiki', // Usually your repo name.
   deploymentBranch: 'gh-pages',
   trailingSlash: false,
@@ -67,22 +67,10 @@ const config = {
         hideOnScroll: false,
         items: [
           {
-          type: 'doc',
-          docId: 'PoemSuits/intro',
-          position: 'left',
-          label: 'PoemSuits',
-          },
-          {
             type: 'doc',
-            docId: 'Pouvoir/intro',
+            docId: 'intro',
             position: 'left',
-            label: 'Pouvoir',
-          },
-          {
-            type: 'doc',
-            docId: 'NeigeItems/intro',
-            position: 'left',
-            label: 'NeigeItems',
+            label: '开始',
           },
           // 搜索框
           {
@@ -118,16 +106,16 @@ const config = {
             items: [
               {
                 label: 'QQ群',
-                href: 'http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=21iwTUVq9CNq09P_qskFUbm19753rFjZ&authKey=qsBXx4lP6Hl7m9w5r9beGa1HRpaBiCusF88%2FlT1zBUsrl7NeJiGJfd4AXQPjzfO6&noverify=0&group_code=732572379',
+                href: 'http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=-Jt7jabDIxFNwurnYczFYDtB5THvLtYF&authKey=DHfOhW3D09FwqEd7dckd5Atj%2F%2BrVTydctbl6eAGMDMtLHjSMXXsGCGcgJmrYlCsg&noverify=0&group_code=732572379',
               },
             ],
           },
           {
-            title: '个人主页',
+            title: '插件发布',
             items: [
               {
                 label: 'GitHub',
-                href: 'https://github.com/Nerorrlex911',
+                href: 'https://github.com/Nerorrlex911/Poem-Wiki',
               },
             ],
           },

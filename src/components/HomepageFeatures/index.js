@@ -4,25 +4,25 @@ import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: '高度客制化',
+    title: '简单易用',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        自由地创造你想要的内容
+        就这点配置有啥难的.
       </>
     ),
   },
   {
-    title: '上手困难',
+    title: '文档详细',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        做好心理准备, 你会遇到很多麻烦，即使有社区会提供帮助。
+        看完文档学不会怎么用说明你不适合使用本插件.
       </>
     ),
   },
   {
-    title: '功能强大',
+    title: '功能',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
