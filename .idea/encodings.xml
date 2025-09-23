@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/docs/Minestom/intro.md" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/docs/Minestom/多线程/多线程原理.md" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/docs/Minestom/设计/设计.md" charset="UTF-8" />
     <file url="PROJECT" charset="GBK" />
   </component>
 </project>
